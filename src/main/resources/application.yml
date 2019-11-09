@@ -1,0 +1,9 @@
+usgsProperties:
+  schema: "https"
+  host: "earthquake.usgs.gov"
+  port: ""
+  path: "/fdsnws/event/1"
+
+usgsEndPoint:
+  earthQuakesBetweenDate: "/query"
+  earthQuakesCount: "/count"
