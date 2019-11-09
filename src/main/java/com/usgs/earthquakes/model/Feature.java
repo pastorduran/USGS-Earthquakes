@@ -1,4 +1,4 @@
-package com.usgs.earth.quakes.model;
+package com.usgs.earthquakes.model;
 
 import java.util.List;
 
@@ -7,21 +7,26 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
-* Geometry model to store earthquakes coordinates   
+* Feature model  
 *
 * @author Pastor Durán
 * @project USGS-Earthquakes
-* @class Geometry
+* @class Feature
 * @date nov 11, 2019
 * 
 */
 @Getter
 @Setter
 @ToString
-public class Geometry {
+public class Feature {
+	
+	private String id;
 	
 	private String type;
 	
-	private List<Double> coordinates;
-
+	private List<Property> properties;
+	
+	private Geometry geometry;
+	
+	
 }

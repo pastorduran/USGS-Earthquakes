@@ -1,4 +1,4 @@
-package com.usgs.earth.quakes.model;
+package com.usgs.earthquakes.model;
 
 import java.util.List;
 
