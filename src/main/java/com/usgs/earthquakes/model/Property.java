@@ -1,5 +1,6 @@
 package com.usgs.earthquakes.model;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.ToString;
 /**
 * Property model
 *
-* @author Pastor Durán
+* @author pastorduran
 * @project USGS-Earthquakes
 * @class Property
 * @date nov 11, 2019
@@ -18,8 +19,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Property {
+public class Property implements Serializable {
 	
+	private static final long serialVersionUID = 1911498671130501487L;
+
 	private Double mag;
 	
 	private String place;

@@ -1,5 +1,6 @@
 package com.usgs.earthquakes.model;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.ToString;
 /**
 * MetaData model
 *
-* @author Pastor Durán
+* @author pastorduran
 * @project USGS-Earthquakes
 * @class MetaData
 * @date nov 11, 2019
@@ -18,19 +19,20 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MetaData {
+public class MetaData implements Serializable  {
 
-	private String generated;
-	
+	private static final long serialVersionUID = -6851399707071334615L;
+
+	private BigInteger generated;	
 	
 	private String url;
 	
 	private String title;
 	
-	private BigInteger status;
+	private Integer status;
 	
 	private String api;
 	
-	private BigInteger count;
+	private Integer count;
 
 }

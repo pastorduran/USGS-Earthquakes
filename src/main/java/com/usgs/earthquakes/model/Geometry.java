@@ -1,5 +1,6 @@
 package com.usgs.earthquakes.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.ToString;
 /**
 * Geometry model to store earthquakes coordinates   
 *
-* @author Pastor Durán
+* @author pastorduran
 * @project USGS-Earthquakes
 * @class Geometry
 * @date nov 11, 2019
@@ -18,8 +19,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Geometry {
-	
+public class Geometry implements Serializable {
+
+	private static final long serialVersionUID = 5089966947548786348L;
+
 	private String type;
 	
 	private List<Double> coordinates;

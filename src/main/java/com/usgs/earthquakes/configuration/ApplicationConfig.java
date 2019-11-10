@@ -46,6 +46,12 @@ public class ApplicationConfig {
 	public static class UsgsEndPoint{
 		private String earthQuakesBetweenDate;
 		private String earthQuakesCount;
+		private String startTimeParam;
+		private String endTimeParam;
+		private String minMagnitudeParam;
+		private String maxMagnitudeParam;
+		private String formatParam;
+		private String formatValue;
 	}
 
 }

@@ -1,5 +1,5 @@
 usgsProperties:
-  schema: "https"
+  schema: "https://"
   host: "earthquake.usgs.gov"
   port: ""
   path: "/fdsnws/event/1"
@@ -7,3 +7,9 @@ usgsProperties:
 usgsEndPoint:
   earthQuakesBetweenDate: "/query"
   earthQuakesCount: "/count"
+  startTimeParam: "starttime"
+  endTimeParam: "endtime"
+  minMagnitudeParam: "minmagnitude"
+  maxMagnitudeParam: "maxmagnitude"
+  formatParam: "format"
+  formatValue: "geojson"

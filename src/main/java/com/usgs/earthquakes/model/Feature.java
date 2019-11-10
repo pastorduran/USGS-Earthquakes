@@ -1,6 +1,6 @@
 package com.usgs.earthquakes.model;
 
-import java.util.List;
+import java.io.Serializable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import lombok.ToString;
 /**
 * Feature model  
 *
-* @author Pastor Durán
+* @author pastorduran
 * @project USGS-Earthquakes
 * @class Feature
 * @date nov 11, 2019
@@ -18,13 +18,15 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Feature {
-	
+public class Feature implements Serializable {
+
+	private static final long serialVersionUID = 9091603678234745422L;
+
 	private String id;
 	
 	private String type;
 	
-	private List<Property> properties;
+	private Property properties;
 	
 	private Geometry geometry;
 	
