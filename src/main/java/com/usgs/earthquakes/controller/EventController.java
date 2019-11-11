@@ -67,7 +67,7 @@ public class EventController {
 	public ResponseEntity<String> getSismosPorMagnitud(@RequestParam String magnitudMinima, @RequestParam String magnitudMaxima){
 		Event event = null;
 		try {
-			earthQuakeService.getEarthQuakeBetweenMagnitudes(magnitudMinima, magnitudMaxima);	
+			event = earthQuakeService.getEarthQuakeBetweenMagnitudes(magnitudMinima, magnitudMaxima);	
 		} catch (UsgsEarthQuakesException e) {
 			new ResponseEntity<>(EarthQuakeTool
 					.getJson(new Response(ResponseConstant.STATUS_CODE_FAILED, e.getMessage(), null)), HttpStatus.OK);
