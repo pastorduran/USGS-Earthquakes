@@ -167,6 +167,6 @@ Este Servicio busca los sismos ocurridos en un dos paises a partir de dos rangos
 ```
 	curl -H "Content-Type: application/json" -d "{"fechaInicioR1" : "2019-10-01", "fechaTerminoR1" : "2019-10-03", "fechaInicioR2" : "2019-10-06", "fechaTerminoR2" : "2019-10-14", "paisR1" : "PUERTO RICO", "paisR2" : "CHILE"}" -X GET http://localhost:8080/sismos/porPaisesYFechas
 ```
-#DIAGRAMA DE DESPLIEGUE
+# DIAGRAMA DE DESPLIEGUE
 
 ![Image](https://github.com/pastorduran/USGS-Earthquakes/blob/master/DiagramaDespliegueUSGS-EarthQuake.jpg)
