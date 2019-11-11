@@ -170,3 +170,7 @@ Este Servicio busca los sismos ocurridos en un dos paises a partir de dos rangos
 # DIAGRAMA DE DESPLIEGUE
 
 ![Image](https://github.com/pastorduran/USGS-Earthquakes/blob/master/DiagramaDespliegueUSGS-EarthQuake.jpg)
+
+# DIAGRAMA DE SECUENCIA
+En el siguiente diagrama de secuencia se muestra una llamada básica a un método de la API, el resto de las llamadas funcionan de la misma forma
+![Image](https://github.com/pastorduran/USGS-Earthquakes/blob/master/DiagramaSecuenciaUSGS-EarthQuake.jpg)
