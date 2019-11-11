@@ -1,6 +1,6 @@
 # USGS Earthquakes service
-Esta API se encarga de gestionar toda la información referente a los sismos que ocurren cada día a nivel mundial, 
-permite realizar consulta por rango de fechas, magnitud de los sismos y país donde ocurren
+Esta API se encarga de gestionar toda la informaciÃ³n referente a los sismos que ocurren cada dÃ­a a nivel mundial, 
+permite realizar consulta por rango de fechas, magnitud de los sismos y paÃ­s donde ocurren
 
 # Pre-requisitos:
 
@@ -17,11 +17,11 @@ $ ./gradlew bootJar
 ```
 $ ./gradlew bootRun
 ```
-por defecto luego de ejecutar el comando bootRun la aplicación iniciara en el puerto 8080, luego de iniciar correctamente, se podra consumir el servicio
+por defecto luego de ejecutar el comando bootRun la aplicaciÃ³n iniciara en el puerto 8080, luego de iniciar correctamente, se podra consumir el servicio
 
 
 # API DOC
-Para revisar la documentación generada por la API, luego de levantar el servicio, se debe acceder a la misma mediante el siguiente enlace:
+Para revisar la documentaciÃ³n generada por la API, luego de levantar el servicio, se debe acceder a la misma mediante el siguiente enlace:
 * **Url:**
 	`
 	http://localhost:8080/swagger-ui.html#/
@@ -44,7 +44,7 @@ Este Servicio busca los sismos ocurridos en un rango de fechas
 * **Headers:**  
 	 1. **Content-Type:** application/json
  
-* **Parámetros:**
+* **ParÃ¡metros:**
 	 1. **fechaInicio** (formato yyy-mm-dd)
 	 2. **fechaFin** (formato yyy-mm-dd)
    
@@ -71,7 +71,7 @@ Este Servicio busca los sismos ocurridos en un rango magnitudes de sismos
 * **Headers:**  
 	 1. **Content-Type:** application/json
  
-* **Parámetros:**
+* **ParÃ¡metros:**
 	 1. **magnitudMinima** (formato Double)
 	 2. **magnitudMaxima** (formato Double)
    
@@ -98,13 +98,13 @@ Este Servicio busca los sismos ocurridos en dos rangos de fechas
 * **Headers:**  
 	 1. **Content-Type:** application/json
  
-* **Parámetros:**
+* **ParÃ¡metros:**
 	 1. **fechaInicioR1** (formato yyy-mm-dd)
 	 2. **fechaTerminoR1** (formato yyy-mm-dd)
 	 3. **fechaInicioR2** (formato yyy-mm-dd)
 	 4. **fechaTerminoR2** (formato yyy-mm-dd)	 
    
-   Nota: Estos parámetros son recibidos por body unicamente
+   Nota: Estos parÃ¡metros son recibidos por body unicamente
  
 * **Ejemplo Request:**
 
@@ -112,8 +112,8 @@ Este Servicio busca los sismos ocurridos en dos rangos de fechas
 	curl -H "Content-Type: application/json" -d "{"fechaInicioR1" : "2019-10-01", "" : "2019-10-03", "fechaInicioR2" : "2019-10-06", "fechaTerminoR2" : "2019-10-14"}" -X GET http://localhost:8080/sismos/porRangoFechas
 ```
 
-## 4. SISMOS POR PAÍS
-Este Servicio busca los sismos ocurridos en un país
+## 4. SISMOS POR PAÃS
+Este Servicio busca los sismos ocurridos en un paÃ­s
 
 * **Method:**
    `
@@ -128,7 +128,7 @@ Este Servicio busca los sismos ocurridos en un país
 * **Headers:**  
 	 1. **Content-Type:** application/json
  
-* **Parámetros:**
+* **ParÃ¡metros:**
 	 1. **pais** (formato String)
    
  
@@ -154,7 +154,7 @@ Este Servicio busca los sismos ocurridos en un dos paises a partir de dos rangos
 * **Headers:**  
 	 1. **Content-Type:** application/json
  
-* **Parámetros:**
+* **ParÃ¡metros:**
 	 1. **paisR1** (formato String)
 	 2. **paisR2** (formato String)
 	 3. **fechaInicioR1** (formato yyy-mm-dd)
@@ -167,3 +167,6 @@ Este Servicio busca los sismos ocurridos en un dos paises a partir de dos rangos
 ```
 	curl -H "Content-Type: application/json" -d "{"fechaInicioR1" : "2019-10-01", "fechaTerminoR1" : "2019-10-03", "fechaInicioR2" : "2019-10-06", "fechaTerminoR2" : "2019-10-14", "paisR1" : "PUERTO RICO", "paisR2" : "CHILE"}" -X GET http://localhost:8080/sismos/porPaisesYFechas
 ```
+#DIAGRAMA DE DESPLIEGUE
+
+![alt test](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=DiagramaDespliegueUSGS-EarthQuake#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1k3k6lOEJPyP-tqiLbL-PRW5iDu9P8YDR%26export%3Ddownload)
