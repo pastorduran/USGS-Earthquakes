@@ -20,9 +20,9 @@ $ ./gradlew bootRun
 por defecto luego de ejecutar el comando bootRun la aplicación iniciara en el puerto 8080, luego de iniciar correctamente, se podra consumir el servicio
 
 
-## Lista de Servicios
+# Lista de Servicios
 
-### 1. SISMOS POR FECHA
+## 1. SISMOS POR FECHA
 Este Servicio busca los sismos ocurridos en un rango de fechas
 
 * **Method:**
@@ -49,7 +49,7 @@ Este Servicio busca los sismos ocurridos en un rango de fechas
 	curl -H "Content-Type: application/json" -X GET localhost:8080/sismos/porFechas?fechaInicio=2019-10-13&fechaFin=2019-10-14
 ```
 
-### 2. SISMOS POR MAGNITUDES
+## 2. SISMOS POR MAGNITUDES
 Este Servicio busca los sismos ocurridos en un rango magnitudes de sismos
 
 * **Method:**
@@ -76,7 +76,7 @@ Este Servicio busca los sismos ocurridos en un rango magnitudes de sismos
 	curl -H "Content-Type: application/json" -X GET http://localhost:8080/sismos/porMagnitud?magnitudMinima=6.1&magnitudMaxima=6.9
 ```
 
-### 3. SISMOS POR RANGO DE FECHAS
+## 3. SISMOS POR RANGO DE FECHAS
 Este Servicio busca los sismos ocurridos en dos rangos de fechas
 
 * **Method:**
@@ -106,7 +106,7 @@ Este Servicio busca los sismos ocurridos en dos rangos de fechas
 	curl -H "Content-Type: application/json" -d "{"fechaInicioR1" : "2019-10-01", "" : "2019-10-03", "fechaInicioR2" : "2019-10-06", "fechaTerminoR2" : "2019-10-14"}" -X GET http://localhost:8080/sismos/porRangoFechas
 ```
 
-### 4. SISMOS POR PAÍS
+## 4. SISMOS POR PAÍS
 Este Servicio busca los sismos ocurridos en un país
 
 * **Method:**
@@ -132,7 +132,7 @@ Este Servicio busca los sismos ocurridos en un país
 	curl -H "Content-Type: application/json" -X GET http://localhost:8080/sismos/porPais?pais=chile
 ```
 
-### 4. SISMOS POR RANGOS DE FECHAS Y PAISES
+## 4. SISMOS POR RANGOS DE FECHAS Y PAISES
 Este Servicio busca los sismos ocurridos en un dos paises a partir de dos rangos de fechas
 
 * **Method:**
@@ -159,12 +159,5 @@ Este Servicio busca los sismos ocurridos en un dos paises a partir de dos rangos
 * **Ejemplo Request:**
 
 ```
-	curl -H "Content-Type: application/json" -d "{
-	"fechaInicioR1" : "2019-10-01",
-	"fechaTerminoR1" : "2019-10-03",
-	"fechaInicioR2" : "2019-10-06",
-	"fechaTerminoR2" : "2019-10-14",
-	"paisR1" : "PUERTO RICO",
-	"paisR2" : "CHILE"
-}" -X GET http://localhost:8080/sismos/porPaisesYFechas
+	curl -H "Content-Type: application/json" -d "{"fechaInicioR1" : "2019-10-01", "fechaTerminoR1" : "2019-10-03", "fechaInicioR2" : "2019-10-06", "fechaTerminoR2" : "2019-10-14", "paisR1" : "PUERTO RICO", "paisR2" : "CHILE"}" -X GET http://localhost:8080/sismos/porPaisesYFechas
 ```
