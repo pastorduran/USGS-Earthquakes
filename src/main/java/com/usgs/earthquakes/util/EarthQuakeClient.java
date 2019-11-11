@@ -1,6 +1,8 @@
 package com.usgs.earthquakes.util;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.usgs.earthquakes.model.Event;
 
 
 /**
@@ -26,6 +28,15 @@ public class EarthQuakeClient {
 	 */
 	public static String getJson(Object object) {
 		return new GsonBuilder().setDateFormat(DATE_FORMAT).serializeNulls().create().toJson(object);
+	}
+	
+	/**
+	 * Method that convert json string to Event Object
+	 * @param jsonEvent
+	 * @return Event 
+	 */
+	public static Event getEventFromJson(String jsonEvent) {
+		return new Gson().fromJson(jsonEvent, Event.class);
 	}
 
 }

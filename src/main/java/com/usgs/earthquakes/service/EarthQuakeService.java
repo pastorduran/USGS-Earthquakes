@@ -1,5 +1,7 @@
 package com.usgs.earthquakes.service;
 
+import com.usgs.earthquakes.exception.UsgsEarthQuakesException;
+import com.usgs.earthquakes.model.Event;
 
 /**
  * 
@@ -17,9 +19,10 @@ public interface EarthQuakeService {
 	 * 
 	 * @param startTime
 	 * @param endTime
-	 * @return Event Object as String
+	 * @return Event Object
+	 * @throws UsgsEarthQuakesException 
 	 */
-	String getEarthQuakeBetweenDates(String startTime, String endTime);
+	Event getEarthQuakeBetweenDates(String startTime, String endTime) throws UsgsEarthQuakesException;
 
 	
 	/**
@@ -27,8 +30,18 @@ public interface EarthQuakeService {
 	 * 
 	 * @param mingMagnitude
 	 * @param maxMagnitude
-	 * @return Event Object as String
+	 * @return Event Object
+	 * @throws UsgsEarthQuakesException 
 	 */
-	String getEarthQuakeBetweenMagnitudes(String mingMagnitude, String maxMagnitude);
+	Event getEarthQuakeBetweenMagnitudes(String mingMagnitude, String maxMagnitude) throws UsgsEarthQuakesException;
+	
+
+	/**
+	 * Method that search all earthquakes
+	 * 
+	 * @param
+	 * @return Evemt Object
+	 */
+	Event getEarthQuakes() throws UsgsEarthQuakesException;
 
 }

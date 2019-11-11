@@ -5,14 +5,13 @@ package com.usgs.earthquakes.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.usgs.earthquakes.configuration.ApplicationConfig;
-import com.usgs.earthquakes.constant.ResponseConstant;
+import com.usgs.earthquakes.exception.UsgsEarthQuakesException;
 import com.usgs.earthquakes.model.Event;
-import com.usgs.earthquakes.response.Response;
 import com.usgs.earthquakes.service.EarthQuakeService;
-import com.usgs.earthquakes.util.EarthQuakeClient;
 
 /**
  * Service implementation to EarthQuakeService interface
@@ -38,41 +37,66 @@ public class EarthQuakesServiceImpl implements EarthQuakeService {
 	private RestTemplate ugsRestTemplate;
 
 	/**
-	 * @see com.usgs.earthquakes.service.EarthQuakeService#getEarthQuakeBetweenDates(String, String)
+	 * @see com.usgs.earthquakes.service.EarthQuakeService#getEarthQuakeBetweenDates(String,
+	 *      String)
 	 */
 	@Override
-	public String getEarthQuakeBetweenDates(String startTime, String endTime) {
-		Event event = ugsRestTemplate.getForObject(appConfig.getUsgsProperties().getSchema()
-				.concat(appConfig.getUsgsProperties().getHost().concat(appConfig.getUsgsProperties().getPath()
-						.concat(appConfig.getUsgsEndPoint().getEarthQuakesBetweenDate()).concat(INIT_PARAMS)
-						.concat(appConfig.getUsgsEndPoint().getFormatParam()).concat(EQUAL_SYMBOL)
-						.concat(appConfig.getUsgsEndPoint().getFormatValue()).concat(AND_SYMBOL)
-						.concat(appConfig.getUsgsEndPoint().getStartTimeParam()).concat(EQUAL_SYMBOL).concat(startTime)
-						.concat(AND_SYMBOL).concat(appConfig.getUsgsEndPoint().getEndTimeParam()).concat(EQUAL_SYMBOL)
-						.concat(endTime))),
-				Event.class);
-		return EarthQuakeClient
-				.getJson(new Response(ResponseConstant.STATUS_CODE_OK, ResponseConstant.MESSAGE_OK, event));
+	public Event getEarthQuakeBetweenDates(String startTime, String endTime) throws UsgsEarthQuakesException {
+		try {
+			return ugsRestTemplate.getForObject(appConfig.getUsgsProperties().getSchema()
+					.concat(appConfig.getUsgsProperties().getHost().concat(appConfig.getUsgsProperties().getPath()
+							.concat(appConfig.getUsgsEndPoint().getEarthQuakesBetweenDate()).concat(INIT_PARAMS)
+							.concat(appConfig.getUsgsEndPoint().getFormatParam()).concat(EQUAL_SYMBOL)
+							.concat(appConfig.getUsgsEndPoint().getFormatValue()).concat(AND_SYMBOL)
+							.concat(appConfig.getUsgsEndPoint().getStartTimeParam()).concat(EQUAL_SYMBOL)
+							.concat(startTime).concat(AND_SYMBOL).concat(appConfig.getUsgsEndPoint().getEndTimeParam())
+							.concat(EQUAL_SYMBOL).concat(endTime))),
+					Event.class);
+		} catch (RestClientException exception) {
+			throw new UsgsEarthQuakesException(exception.getMessage());
+		}
 	}
 
 	/**
-	 * @see com.usgs.earthquakes.service.EarthQuakeService#getEarthQuakeBetweenMagnitudes(String, String)
+	 * @see com.usgs.earthquakes.service.EarthQuakeService#getEarthQuakeBetweenMagnitudes(String,
+	 *      String)
 	 */
 	@Override
-	public String getEarthQuakeBetweenMagnitudes(String minMagnitude, String maxMagnitude) {
-		Event event = ugsRestTemplate.getForObject(appConfig.getUsgsProperties().getSchema()
-				.concat(appConfig.getUsgsProperties().getHost()
-						.concat(appConfig.getUsgsProperties().getPath()
-								.concat(appConfig.getUsgsEndPoint().getEarthQuakesBetweenDate()).concat(INIT_PARAMS)
-								.concat(appConfig.getUsgsEndPoint().getFormatParam()).concat(EQUAL_SYMBOL)
-								.concat(appConfig.getUsgsEndPoint().getFormatValue()).concat(AND_SYMBOL)
-								.concat(appConfig.getUsgsEndPoint().getMinMagnitudeParam()).concat(EQUAL_SYMBOL)
-								.concat(minMagnitude).concat(AND_SYMBOL)
-								.concat(appConfig.getUsgsEndPoint().getMaxMagnitudeParam()).concat(EQUAL_SYMBOL)
-								.concat(maxMagnitude))),
-				Event.class);
-		return EarthQuakeClient
-				.getJson(new Response(ResponseConstant.STATUS_CODE_OK, ResponseConstant.MESSAGE_OK, event));
+	public Event getEarthQuakeBetweenMagnitudes(String minMagnitude, String maxMagnitude)
+			throws UsgsEarthQuakesException {
+		try {
+			return ugsRestTemplate
+					.getForObject(appConfig.getUsgsProperties().getSchema()
+							.concat(appConfig.getUsgsProperties().getHost().concat(appConfig.getUsgsProperties()
+									.getPath().concat(appConfig.getUsgsEndPoint().getEarthQuakesBetweenDate())
+									.concat(INIT_PARAMS).concat(appConfig.getUsgsEndPoint().getFormatParam())
+									.concat(EQUAL_SYMBOL).concat(appConfig.getUsgsEndPoint().getFormatValue())
+									.concat(AND_SYMBOL).concat(appConfig.getUsgsEndPoint().getMinMagnitudeParam())
+									.concat(EQUAL_SYMBOL).concat(minMagnitude).concat(AND_SYMBOL)
+									.concat(appConfig.getUsgsEndPoint().getMaxMagnitudeParam()).concat(EQUAL_SYMBOL)
+									.concat(maxMagnitude))),
+							Event.class);
+		} catch (RestClientException exception) {
+			throw new UsgsEarthQuakesException(exception.getMessage());
+		}
+	}
+
+	/**
+	 * @see com.usgs.earthquakes.service.EarthQuakeService#getEarthQuakes()
+	 */
+	@Override
+	public Event getEarthQuakes() throws UsgsEarthQuakesException {
+		try {
+			return ugsRestTemplate.getForObject(
+					appConfig.getUsgsProperties().getSchema()
+							.concat(appConfig.getUsgsProperties().getHost().concat(appConfig.getUsgsProperties()
+									.getPath().concat(appConfig.getUsgsEndPoint().getEarthQuakesBetweenDate())
+									.concat(INIT_PARAMS).concat(appConfig.getUsgsEndPoint().getFormatParam())
+									.concat(EQUAL_SYMBOL).concat(appConfig.getUsgsEndPoint().getFormatValue()))),
+					Event.class);
+		} catch (RestClientException exception) {
+			throw new UsgsEarthQuakesException(exception.getMessage());
+		}
 	}
 
 }
