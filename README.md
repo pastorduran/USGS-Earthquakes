@@ -169,4 +169,4 @@ Este Servicio busca los sismos ocurridos en un dos paises a partir de dos rangos
 ```
 #DIAGRAMA DE DESPLIEGUE
 
-![alt test](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=DiagramaDespliegueUSGS-EarthQuake#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1k3k6lOEJPyP-tqiLbL-PRW5iDu9P8YDR%26export%3Ddownload)
+![Image](https://github.com/pastorduran/USGS-Earthquakes/blob/master/DiagramaDespliegueUSGS-EarthQuake.jpg)
