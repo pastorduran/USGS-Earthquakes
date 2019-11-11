@@ -3,6 +3,10 @@
  */
 package com.usgs.earthquakes.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -11,7 +15,9 @@ import org.springframework.web.client.RestTemplate;
 import com.usgs.earthquakes.configuration.ApplicationConfig;
 import com.usgs.earthquakes.exception.UsgsEarthQuakesException;
 import com.usgs.earthquakes.model.Event;
+import com.usgs.earthquakes.model.Feature;
 import com.usgs.earthquakes.service.EarthQuakeService;
+import com.usgs.earthquakes.util.EarthQuakeTool;
 
 /**
  * Service implementation to EarthQuakeService interface
@@ -97,6 +103,21 @@ public class EarthQuakesServiceImpl implements EarthQuakeService {
 		} catch (RestClientException exception) {
 			throw new UsgsEarthQuakesException(exception.getMessage());
 		}
+	}
+
+	/**
+	 * @see com.usgs.earthquakes.service.EarthQuakeService#countEarthQuakes(String, String, String)
+	 */
+	@Override
+	public Integer countEarthQuakes(String startTime, String endTime, String country) throws UsgsEarthQuakesException {
+		Integer counterEarthQuakes = 0;
+		try {
+			Event event = this.getEarthQuakeBetweenDates(startTime, endTime);
+			counterEarthQuakes += EarthQuakeTool.getFeatures(country, event).size();
+		} catch (UsgsEarthQuakesException exception) {
+			throw new UsgsEarthQuakesException(exception.getMessage());
+		}
+		return counterEarthQuakes;
 	}
 
 }

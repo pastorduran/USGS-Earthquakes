@@ -15,7 +15,7 @@ public interface EarthQuakeService {
 	
 	
 	/**
-	 * Metodo para obtener los sismos registrados entre dos fechas
+	 * Method that search earthquakes between two dates
 	 * 
 	 * @param startTime
 	 * @param endTime
@@ -26,7 +26,7 @@ public interface EarthQuakeService {
 
 	
 	/**
-	 * Metodo para obtener los sismos registrados entre dos magnitudes
+	 * Method that search earthquakes between two magnitudes
 	 * 
 	 * @param mingMagnitude
 	 * @param maxMagnitude
@@ -43,5 +43,15 @@ public interface EarthQuakeService {
 	 * @return Evemt Object
 	 */
 	Event getEarthQuakes() throws UsgsEarthQuakesException;
+	
+	/**
+	 * Method that count earthquakes by dates and country
+	 * @param startTime
+	 * @param endTime
+	 * @param country
+	 * @return count earthquakes
+	 * @throws UsgsEarthQuakesException
+	 */
+	Integer countEarthQuakes(String startTime, String endTime, String country) throws UsgsEarthQuakesException;
 
 }

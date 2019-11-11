@@ -19,10 +19,12 @@ import com.usgs.earthquakes.constant.ResponseConstant;
 import com.usgs.earthquakes.exception.UsgsEarthQuakesException;
 import com.usgs.earthquakes.model.Event;
 import com.usgs.earthquakes.model.Feature;
+import com.usgs.earthquakes.request.PaisesYFechasRequest;
 import com.usgs.earthquakes.request.RangoFechasRequest;
+import com.usgs.earthquakes.response.EarthQuakeCount;
 import com.usgs.earthquakes.response.Response;
 import com.usgs.earthquakes.service.EarthQuakeService;
-import com.usgs.earthquakes.util.EarthQuakeClient;
+import com.usgs.earthquakes.util.EarthQuakeTool;
 
 /**
  * Event controller
@@ -48,14 +50,14 @@ public class EventController {
 		try {
 			event = earthQuakeService.getEarthQuakeBetweenDates(fechaInicio, fechaFin);
 		} catch (UsgsEarthQuakesException e) {
-			new ResponseEntity<>(EarthQuakeClient
+			new ResponseEntity<>(EarthQuakeTool
 					.getJson(new Response(ResponseConstant.STATUS_CODE_FAILED, e.getMessage(), null)), HttpStatus.OK);
 		}
 		if (event != null && event.getFeatures() != null) {
-			return new ResponseEntity<>(EarthQuakeClient
+			return new ResponseEntity<>(EarthQuakeTool
 					.getJson(new Response(ResponseConstant.STATUS_CODE_OK, ResponseConstant.MESSAGE_OK, event.getFeatures())), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(EarthQuakeClient
+			return new ResponseEntity<>(EarthQuakeTool
 					.getJson(new Response(ResponseConstant.STATUS_CODE_FAILED, ResponseConstant.MESSAGE_FAILED, null)), HttpStatus.OK);
 		}
 	}
@@ -67,15 +69,15 @@ public class EventController {
 		try {
 			earthQuakeService.getEarthQuakeBetweenMagnitudes(magnitudMinima, magnitudMaxima);	
 		} catch (UsgsEarthQuakesException e) {
-			new ResponseEntity<>(EarthQuakeClient
+			new ResponseEntity<>(EarthQuakeTool
 					.getJson(new Response(ResponseConstant.STATUS_CODE_FAILED, e.getMessage(), null)), HttpStatus.OK);
 		}
 		
-		if (event != null && event.getFeatures()!=null) {
-			return new ResponseEntity<>(EarthQuakeClient
+		if (event != null && event.getFeatures() != null) {
+			return new ResponseEntity<>(EarthQuakeTool
 					.getJson(new Response(ResponseConstant.STATUS_CODE_OK, ResponseConstant.MESSAGE_OK, event.getFeatures())), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(EarthQuakeClient
+			return new ResponseEntity<>(EarthQuakeTool
 					.getJson(new Response(ResponseConstant.STATUS_CODE_OK, ResponseConstant.MESSAGE_NOT_FOUND, null)), HttpStatus.OK);
 		}
 	}
@@ -87,14 +89,12 @@ public class EventController {
 		List<Feature> features = new ArrayList<>();
 		try {
 			event = earthQuakeService.getEarthQuakes();
-			features.addAll(event.getFeatures().stream().filter(
-					feat -> feat.getProperties().getPlace().toUpperCase().contains(pais.toUpperCase())
-					).collect(Collectors.toList()));
+			features.addAll(EarthQuakeTool.getFeatures(pais, event));
 		} catch (UsgsEarthQuakesException e) {
-			new ResponseEntity<>(EarthQuakeClient
+			new ResponseEntity<>(EarthQuakeTool
 					.getJson(new Response(ResponseConstant.STATUS_CODE_FAILED, e.getMessage(), null)), HttpStatus.OK);
 		}
-		return new ResponseEntity<>(EarthQuakeClient
+		return new ResponseEntity<>(EarthQuakeTool
 				.getJson(new Response(ResponseConstant.STATUS_CODE_OK, ResponseConstant.MESSAGE_OK, features)),HttpStatus.OK);
 	}
 	
@@ -108,10 +108,25 @@ public class EventController {
 			features.addAll(firstSearchEvent.getFeatures());
 			features.addAll(secondSearchEvent.getFeatures());
 		} catch (UsgsEarthQuakesException e) {
-			new ResponseEntity<>(EarthQuakeClient
+			new ResponseEntity<>(EarthQuakeTool
 					.getJson(new Response(ResponseConstant.STATUS_CODE_FAILED, e.getMessage(), null)), HttpStatus.OK);
 		}
-		return new ResponseEntity<>(EarthQuakeClient
+		return new ResponseEntity<>(EarthQuakeTool
 				.getJson(new Response(ResponseConstant.STATUS_CODE_OK, ResponseConstant.MESSAGE_OK, features)),HttpStatus.OK);
+	}
+	
+	@Loggable
+	@GetMapping(path = "/porPaisesYFechas", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getCantidadSismosPorPaisYFechas(@RequestBody PaisesYFechasRequest paisesYFechas) {
+		Integer counterEq = 0;
+		try {
+			counterEq += earthQuakeService.countEarthQuakes(paisesYFechas.getFechaInicioR1(), paisesYFechas.getFechaTerminoR1(), paisesYFechas.getPaisR1());
+			counterEq += earthQuakeService.countEarthQuakes(paisesYFechas.getFechaInicioR2(), paisesYFechas.getFechaTerminoR2(), paisesYFechas.getPaisR2());
+		} catch (UsgsEarthQuakesException e) {
+			new ResponseEntity<>(EarthQuakeTool
+					.getJson(new Response(ResponseConstant.STATUS_CODE_FAILED, e.getMessage(), null)), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(EarthQuakeTool
+				.getJson(new Response(ResponseConstant.STATUS_CODE_OK, ResponseConstant.MESSAGE_OK, new EarthQuakeCount(counterEq))),HttpStatus.OK);
 	}
 }
