@@ -11,20 +11,20 @@ Este Servicio busca los sismos ocurridos en un rango de fechas
    `
 
 * **Url:**
-```
-localhost:8080/sismos/porFechas
-```
+	`
+	localhost:8080/sismos/porFechas
+	`
 
 * **Headers:**  
- 1. **Content-Type:** application/json
+	 1. **Content-Type:** application/json
  
 * **Parámetros:**
- 1. ** fechaInicio ** formato yyy-mm-dd
- 2. ** fechaFin ** formato yyy-mm-dd
+	 1. **fechaInicio** (formato yyy-mm-dd)
+	 2. **fechaFin** (formato yyy-mm-dd)
    
  
 * **Sample Request:**
 
 ```
-curl -H "Content-Type: application/json" -X GET localhost:8080/sismos/porFechas?fechaInicio=2019-10-13&fechaFin=2019-10-14
+	curl -H "Content-Type: application/json" -X GET localhost:8080/sismos/porFechas?fechaInicio=2019-10-13&fechaFin=2019-10-14
 ```
