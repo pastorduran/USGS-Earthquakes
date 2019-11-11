@@ -2,7 +2,6 @@ package com.usgs.earthquakes.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +25,9 @@ import com.usgs.earthquakes.response.Response;
 import com.usgs.earthquakes.service.EarthQuakeService;
 import com.usgs.earthquakes.util.EarthQuakeTool;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 /**
  * Event controller
  *
@@ -35,6 +37,7 @@ import com.usgs.earthquakes.util.EarthQuakeTool;
  * @date nov 12, 2019
  * 
  */
+@Api(value = "Sismos microservice", description = "Esta API lee los sismos registrados a nivel mundial")
 @RestController
 @RequestMapping("/sismos")
 public class EventController {
@@ -42,8 +45,9 @@ public class EventController {
 	@Autowired
 	private EarthQuakeService earthQuakeService;
 	
-
+	
 	@Loggable
+	@ApiOperation(value = "Busqueda de sismos por rango de fecha", notes = "retorna los sismos registrados en el rango de fecha", response = Response.class )
 	@GetMapping(path = "/porFechas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getSismosPorFecha(@RequestParam String fechaInicio, @RequestParam String fechaFin){
 		Event event = null;
@@ -63,6 +67,7 @@ public class EventController {
 	}
 	
 	@Loggable
+	@ApiOperation(value = "Busqueda de sismos por rango de magnitud", notes = "retorna los sismos registrados en el rango de magnitudes ingresadas", response = Response.class )
 	@GetMapping(path = "/porMagnitud", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getSismosPorMagnitud(@RequestParam String magnitudMinima, @RequestParam String magnitudMaxima){
 		Event event = null;
@@ -83,6 +88,7 @@ public class EventController {
 	}
 	
 	@Loggable
+	@ApiOperation(value = "Busqueda de sismos por país", notes = "retorna los sismos registrados por país", response = Response.class )
 	@GetMapping(path = "/porPais", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getSismosPorPais(@RequestParam String pais){
 		Event event = null;
@@ -99,6 +105,7 @@ public class EventController {
 	}
 	
 	@Loggable
+	@ApiOperation(value = "Busqueda de sismos por rango de fechas", notes = "retorna los sismos registrados en dos rangos de fechas", response = Response.class )
 	@GetMapping(path = "/porRangoFechas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getSismosPorRangoFechas(@RequestBody RangoFechasRequest rangoFechas){
 		List<Feature> features = new ArrayList<>();
@@ -116,6 +123,7 @@ public class EventController {
 	}
 	
 	@Loggable
+	@ApiOperation(value = "Busqueda de sismos por rango de fechas y paises", notes = "retorna los sismos registrados en dos rangos de fechas y paises", response = Response.class)
 	@GetMapping(path = "/porPaisesYFechas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getCantidadSismosPorPaisYFechas(@RequestBody PaisesYFechasRequest paisesYFechas) {
 		Integer counterEq = 0;

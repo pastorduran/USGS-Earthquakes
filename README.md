@@ -20,6 +20,12 @@ $ ./gradlew bootRun
 por defecto luego de ejecutar el comando bootRun la aplicación iniciara en el puerto 8080, luego de iniciar correctamente, se podra consumir el servicio
 
 
+# API DOC
+Para revisar la documentación generada por la API, luego de levantar el servicio, se debe acceder a la misma mediante el siguiente enlace:
+* **Url:**
+	`
+	http://localhost:8080/swagger-ui.html#/
+	`
 # Lista de Servicios
 
 ## 1. SISMOS POR FECHA
