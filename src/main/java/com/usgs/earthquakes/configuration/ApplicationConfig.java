@@ -13,7 +13,7 @@ import lombok.ToString;
 * Clase ApplicationConfig para
 * gestionar propiedades de la aplicacion  
 *
-* @author Pastor Durán
+* @author pastorduran
 * @project USGS-Earthquakes
 * @class ApplicationConfig
 * @date nov 11, 2019
